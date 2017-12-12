@@ -1,0 +1,315 @@
+{
+    "CourseID": 1,
+    "group": [
+        {
+            "questionID": 1,
+            "title": "Santa Claus comes to town in a ……… sleigh.",
+            "sort": 0,
+            "answer": [
+                {
+                    "answerID": 2,
+                    "title": "Horse",
+                    "sort": 0,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 3,
+                    "title": "Wolf",
+                    "sort": 1,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 84,
+                    "title": "Reindeer",
+                    "sort": 2,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 85,
+                    "title": "Magical",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "questionID": 2,
+            "title": "Building a …………………… is one of the favorite activities in the Christmas holidays.",
+            "sort": 1,
+            "answer": [
+                {
+                    "answerID": 86,
+                    "title": "House",
+                    "sort": 0,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 87,
+                    "title": "Snowman",
+                    "sort": 1,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 88,
+                    "title": "Swimming pool",
+                    "sort": 2,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 89,
+                    "title": "Castle",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "questionID": 3,
+            "title": "The last day of the year is called:",
+            "sort": 2,
+            "answer": [
+                {
+                    "answerID": 90,
+                    "title": "New Year’s Eve",
+                    "sort": 0,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 91,
+                    "title": "New Year’s Midnight",
+                    "sort": 1,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 92,
+                    "title": "Thanksgiving",
+                    "sort": 2,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 93,
+                    "title": "Christmas",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "questionID": 4,
+            "title": "Venice has one of the most famous ……………… in the world.",
+            "sort": 3,
+            "answer": [
+                {
+                    "answerID": 94,
+                    "title": "Carnivals",
+                    "sort": 0,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 95,
+                    "title": "City",
+                    "sort": 1,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 96,
+                    "title": "Football clubs",
+                    "sort": 2,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 97,
+                    "title": "None of these are correct",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "questionID": 25,
+            "title": "We often use traditional …………… for special dishes in the Tet holiday.",
+            "sort": 4,
+            "answer": [
+                {
+                    "answerID": 98,
+                    "title": "Recipes",
+                    "sort": 0,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 99,
+                    "title": "Pan",
+                    "sort": 1,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 100,
+                    "title": "Clothes",
+                    "sort": 2,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 101,
+                    "title": "People ",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        },
+		 {
+            "questionID": 4,
+            "title": "6.	The whole family is preparing gifts for Christmas. We ….. them and ….. them with ribbon.",
+            "sort": 3,
+            "answer": [
+                {
+                    "answerID": 94,
+                    "title": "Wrap, tie",
+                    "sort": 0,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 95,
+                    "title": "Touch, give away",
+                    "sort": 1,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 96,
+                    "title": "Eat, drink",
+                    "sort": 2,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 97,
+                    "title": "Give, receive",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        }, 
+		{
+            "questionID": 4,
+            "title": "Holidays are great occasions for family ....",
+            "sort": 3,
+            "answer": [
+                {
+                    "answerID": 94,
+                    "title": "To see",
+                    "sort": 0,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 95,
+                    "title": "Gatherings",
+                    "sort": 1,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 96,
+                    "title": "To collect",
+                    "sort": 2,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 97,
+                    "title": "Eating",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        } ,
+		{
+            "questionID": 4,
+            "title": "The Tet holiday is coming. People are making home ………..",
+            "sort": 3,
+            "answer": [
+                {
+                    "answerID": 94,
+                    "title": "Work",
+                    "sort": 0,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 95,
+                    "title": "Decorations",
+                    "sort": 1,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 96,
+                    "title": "Maid ",
+                    "sort": 2,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 97,
+                    "title": "Address ",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        } ,
+		{
+            "questionID": 4,
+            "title": "We intend to ……… in Asia this summer holiday.",
+            "sort": 3,
+            "answer": [
+                {
+                    "answerID": 94,
+                    "title": "Shopping",
+                    "sort": 0,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 95,
+                    "title": "Traveling",
+                    "sort": 1,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 96,
+                    "title": "Travel",
+                    "sort": 2,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 97,
+                    "title": "Going",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        },
+		{
+            "questionID": 4,
+            "title": "The royal wedding is one of the greatest ……………… of the country.",
+            "sort": 3,
+            "answer": [
+                {
+                    "answerID": 94,
+                    "title": "celebrations",
+                    "sort": 0,
+                    "isCorrect": true
+                },
+                {
+                    "answerID": 95,
+                    "title": "Party",
+                    "sort": 1,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 96,
+                    "title": "Time",
+                    "sort": 2,
+                    "isCorrect": false
+                },
+                {
+                    "answerID": 97,
+                    "title": "Activity ",
+                    "sort": 3,
+                    "isCorrect": false
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: df2017f3c050e7442af6890119b7141c
+timeCreated: 1512446356
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Averta
+  fontNames:
+  - Averta
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6d47cdf39f603e845b951c37f0583c88, type: 3}
+  - {fileID: 12800000, guid: 628caa343a0618e4492088bb2ed2afee, type: 3}
+  - {fileID: 12800000, guid: c2dd61749326d6b48b607b0dfd1bf207, type: 3}
+  - {fileID: 12800000, guid: 7cbe5b94d53036545b16bce96b218f63, type: 3}
+  - {fileID: 12800000, guid: 0e01f8a4fa4a6fd4d8e95ac5223cf512, type: 3}
+  - {fileID: 12800000, guid: a11f23e494dcb7a45b2e233531fd90c6, type: 3}
+  - {fileID: 12800000, guid: 01e1161647b76f8449795a384656ee51, type: 3}
+  - {fileID: 12800000, guid: 4f0413665bedd4745ab408ef62587db8, type: 3}
+  - {fileID: 12800000, guid: 0e438a7a351a4f244b66abe959387a67, type: 3}
+  - {fileID: 12800000, guid: 1a9055da496aadd459dfa5b2329ff906, type: 3}
+  - {fileID: 12800000, guid: 4d907efadddf12b4d926327e83467e15, type: 3}
+  - {fileID: 12800000, guid: 662c903db6f6f914d8b95451ca699958, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

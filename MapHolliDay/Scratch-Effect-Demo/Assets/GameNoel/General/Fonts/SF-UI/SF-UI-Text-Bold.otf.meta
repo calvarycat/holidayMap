@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 4f124eafba86ffc478cc993309ce034b
+timeCreated: 1484023060
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: SF UI Text
+  fontNames:
+  - SF UI Text
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1d71d6b2d80b5034a8c1216286b98d86, type: 3}
+  - {fileID: 12800000, guid: 0596b074d0c073e42bcaad508ce8003d, type: 3}
+  - {fileID: 12800000, guid: 07c282388fb05954cafaa9372f39425e, type: 3}
+  - {fileID: 12800000, guid: 4b19631a2d307ab41a7c1e77f1e53351, type: 3}
+  - {fileID: 12800000, guid: 1736816e3e63c334f91c3ded3ccec30c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

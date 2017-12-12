@@ -1,0 +1,25 @@
+KEY,vi,en
+S_EmailExists,Email đã tồn tại.,Email already exists.
+S_EmailNotValid,Email không đúng.,This e-mail address is not valid.
+S_PasswordIncorrect,Mật khẩu không chính xác.,Password is incorrect.
+S_PasswordNotValid,Mật khẩu quá ngắn. Tối thiểu 6 ký tự.,Short passwords are easy to guess. Try one with at least 6 characters.
+S_ConfirmPasswordIncorrect,Nhập lại mật khẩu không đúng.,Confirm passwords don't match. Try again?
+S_NotEmpty,Không được bỏ trống.,Field cannot be empty.
+S_NeedChoosePhoto,Cần chọn avatar để tiếp tục.,You have to provied photo to continue.
+S_ImageLoadSuccess,Chọn hình ảnh thành công.,Image Successfully Loaded
+S_ImageLoadFailed,Không chọn được hình ảnh.,Image Load Failed
+S_EditProfile_Success,Chỉnh sửa thành công,Edit profile success
+S_ChangePassword_Success,Đổi mật khẩu thành công,Change password success
+S_ChangeAvatar_Success,Đổi hình đại diện thành công,Change avatar success
+message_FirstnameIsEmpty,Tên không hợp lệ,Firstname Is Empty
+message_LastnameIsEmpty,Họ không hợp lệ,Lastname Is Empty
+message_PhoneIsEmpty,Số điện thoại không hợp lệ,Phone Is Empty
+message_CountryIsEmpty,Quốc gia không hợp lệ,Country Is Empty
+message_NicknameAlreadyInUsed,Biệt danh đã có người sử dụng,Nickname Already In Used
+message_Wrong_password,Mật khẩu không đúng,Wrong password
+message_NewPasswordNotBeTheSameOldPassword,Mật khẩu mới không được trùng mật khẩu cũ,New Password Not Be The Same Old Password
+email_ObjectFound,Email đã tồn tại,Email already exists
+message_Oops!WrongEmail.,Không tìm thấy email, Email does not found
+message_Oops!WrongUsernameOrPassword.,Email hoặc măt khẩu sai, Email or Password wrong
+nickname_ObjectFound,Biệt danh đã có người sử dụng,Nickname Already In Used
+message_PasswordMustHaveAtLeast6Chacracter, Mật khảu phải có tối thiểu 6 ký tự, Password must have at least 6 character

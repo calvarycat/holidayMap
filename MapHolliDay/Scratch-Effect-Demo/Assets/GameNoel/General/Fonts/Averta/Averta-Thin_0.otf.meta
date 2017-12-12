@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 1a9055da496aadd459dfa5b2329ff906
+timeCreated: 1512446355
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Averta
+  fontNames:
+  - Averta
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0e01f8a4fa4a6fd4d8e95ac5223cf512, type: 3}
+  - {fileID: 12800000, guid: 01e1161647b76f8449795a384656ee51, type: 3}
+  - {fileID: 12800000, guid: 0e438a7a351a4f244b66abe959387a67, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

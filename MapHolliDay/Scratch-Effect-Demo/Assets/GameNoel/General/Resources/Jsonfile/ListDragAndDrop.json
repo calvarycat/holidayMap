@@ -1,0 +1,201 @@
+{
+	"groupDrag": [{
+			"questionID": 1,
+			"dragELement": [{
+					"title": "Did",
+					"sort": 0
+				},
+				{
+					"title": "you",
+					"sort": 1
+				},
+				{
+
+					"title": "have",
+					"sort": 2
+				},
+				{
+					"title": "a happy holiday?",
+					"sort": 3
+				}
+			]
+		},
+		{
+			"questionID": 2,
+			"dragELement": [{
+					"title": "We are going to",
+					"sort": 0
+				},
+				{
+					"title": "the amusement park",
+					"sort": 1
+				},
+				{
+					"title": "this weekend",
+					"sort": 2
+				}
+			]
+		},
+		{
+			"questionID": 3,
+			"dragELement": [{
+					"title": "I booked",
+					"sort": 0
+				},
+				{
+					"title": "a flight ticket",
+					"sort": 1
+				},
+				{
+
+					"title": "for Taiwan",
+					"sort": 2
+				}
+			]
+		},
+		{
+			"questionID": 4,
+			"dragELement": [{
+					"title": "I",
+					"sort": 0
+				},
+				{
+					"title": "wish",
+					"sort": 1
+				},
+				{
+
+					"title": "you",
+					"sort": 2
+				},
+				{
+					"title": " a merry Christmas!",
+					"sort": 3
+				}
+			]
+		},
+		{
+			"questionID": 5,
+			"dragELement": [{
+					"title": "I won’t",
+					"sort": 0
+				},
+				{
+					"title": "go to",
+					"sort": 1
+				},
+				{
+
+					"title": "her birthday party",
+					"sort": 2
+				}
+			]
+		},
+		{
+			"questionID": 6,
+			"dragELement": [{
+					"title": "People",
+					"sort": 0
+				},
+				{
+					"title": "often wear",
+					"sort": 1
+				},
+				{
+
+					"title": "traditional costumes",
+					"sort": 2
+				},
+				{
+
+					"title": "on special days",
+					"sort": 3
+				}
+			]
+		},
+		{
+			"questionID": 7,
+			"dragELement": [{
+					"title": "Her husband",
+					"sort": 0
+				},
+				{
+					"title": "has a plan",
+					"sort": 1
+				},
+				{
+
+					"title": "to celebrate",
+					"sort": 2
+				},
+				{
+
+					"title": "the baby shower",
+					"sort": 3
+				}
+			]
+		},
+		{
+			"questionID": 8,
+			"dragELement": [{
+					"title": "This Halloween",
+					"sort": 0
+				},
+				{
+					"title": "my sister",
+					"sort": 1
+				},
+				{
+
+					"title": "would like to dress up",
+					"sort": 2
+				},
+				{
+
+					"title": "as a Hollywood star",
+					"sort": 3
+				}
+			]
+		},
+		{
+			"questionID": 9,
+			"dragELement": [{
+					"title": "New Years Eve",
+					"sort": 0
+				},
+				{
+					"title": "is a good occasion",
+					"sort": 1
+				},
+				{
+
+					"title": "to express",
+					"sort": 2
+				},
+				{
+
+					"title": " well wishes for the new year",
+					"sort": 3
+				}
+			]
+		},
+		{
+			"questionID": 10,
+			"dragELement": [{
+					"title": "My wife and I",
+					"sort": 0
+				},
+				{
+					"title": "have just decided",
+					"sort": 1
+				},
+				{
+
+					"title": "on our honeymoon destination",
+					"sort": 2
+				}
+			]
+		}
+
+	]
+}
