@@ -16,12 +16,11 @@ public class ScratchControl : MonoBehaviour
     public GameObject ScratchCamera;
     public PNDragAndDropControl dragAndDropControl;
     public Text txtTimeCount;
-    public GameObject cvScreenspace;
     public void InitScratch()
     {
         ScratchCamera.gameObject.SetActive(true);
         int chooseQuest = DataManagerCourse.Instance.dataQuestScratch.groupScratch.Count;
-         g = DataManagerCourse.Instance.dataQuestScratch.groupScratch[Random.Range(0, chooseQuest)];
+        g = DataManagerCourse.Instance.dataQuestScratch.groupScratch[Random.Range(0, chooseQuest)];
 
         Utils.RemoveAllChildren(parrentAnswer);
         txtQuestion.text = g.title;
@@ -81,18 +80,14 @@ public class ScratchControl : MonoBehaviour
     {
         ScratchCamera.gameObject.SetActive(false);
         RootDragAndDrop.gameObject.SetActive(true);
-        dragAndDropControl.InitDragAndDropData();      
-        RootScratch.gameObject.SetActive(false);      
+        dragAndDropControl.InitDragAndDropData();
+        RootScratch.gameObject.SetActive(false);
     }
     #endregion
-
+    public ControlQuestion controlQuest;
     private void Update()
     {
-        //if (isss)
-        //{
-        //    timeRuning += Time.deltaTime;
-        //    txtTimeCount.text = "1";
-        //}
+        txtTimeCount.text = Utils.SecondToString((int)controlQuest.timeRuning);
 
     }
 }

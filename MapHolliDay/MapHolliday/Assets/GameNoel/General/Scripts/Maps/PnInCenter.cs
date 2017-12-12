@@ -12,6 +12,7 @@ public class PnInCenter : MonoBehaviour
     public Text txtTut;
     public GameObject camDevice;
     public CenterControl pnTrungTam;
+    public CenterWithoutService pncenterWithout;
     int centerID;
     int indexText = 0;
     PositionWELCenter datacenter;
@@ -81,7 +82,14 @@ public class PnInCenter : MonoBehaviour
     public void OnButtonQuayLaiSauClick()
     {
         OnShow(false);// tắt đi mở lại cái chọn địa điểm
-        pnTrungTam.OnShow(true);
+        if(Input.location.isEnabledByUser)
+        {
+            pnTrungTam.OnShow(true);
+        }else
+        {
+            pncenterWithout.OnShow(true);
+        }
+       
         Debug.Log("On button Quay lại sau Click");
     }
     #region  im right here

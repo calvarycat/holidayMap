@@ -134,11 +134,11 @@ public class PNDragAndDropControl : MonoBehaviour
         PanelPopUp.intance.OnInitInforPopUp("Hurray!!", "xin chúc mừng bạn đã hoàn thành thử thách, nào ta cùng selfie nào :D!! ");
     }
     #endregion
-    //private void Update()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.H))
-    //    {
-    //        CheckTextInParrent();
-    //    }
-    //}
+    public ControlQuestion controlQuest;
+    public Text txtTimeCount;
+    private void Update()
+    {
+        txtTimeCount.text = Utils.SecondToString((int)controlQuest.timeRuning);
+
+    }
 }

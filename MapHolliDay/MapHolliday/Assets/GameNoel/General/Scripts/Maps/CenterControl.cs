@@ -17,12 +17,13 @@ public class CenterControl : MonoBehaviour
     public Transform parentPnbuttonCenter;
     Vector2 curentPosition;
     public int ChooseCenter = -1;
+    bool isInitSuccess;
     void Start()
     {
         //StartCoroutine(CheckEnableService());
 
         _api = OnlineMaps.instance;
-        Invoke("ViewCurrentPosition", .5f);
+     //   Invoke("ViewCurrentPosition", .5f);
     }
     IEnumerator CheckEnableService()
     {        
@@ -68,19 +69,31 @@ public class CenterControl : MonoBehaviour
      //   Input.location.Stop();
         
     }
+    bool isShow;
     public void OnShow(bool _isShow)
     {
+        isShow = _isShow;
         Root.gameObject.SetActive(_isShow);
+        _api = OnlineMaps.instance;
+        if(_isShow)
+        Invoke("ViewCurrentPosition", .5f);
+        initCounter = 0;
     }
     void ViewCurrentPosition()
     {
         curentPosition = OnlineMapsLocationService.instance.position;
         if (curentPosition != Vector2.zero)
-        {
+        {            
             StartCoroutine(Init());
         }
         else
-        {
+        {           
+            if (Input.location.isEnabledByUser)
+            {
+                float lati = Input.location.lastData.latitude;
+                float longti = Input.location.lastData.longitude;
+                curentPosition = new Vector2(lati, longti);
+            }
             Invoke("ViewCurrentPosition", .5f);
         }
 
@@ -89,11 +102,16 @@ public class CenterControl : MonoBehaviour
     public IEnumerator Init()
     {
       //  Vector2 position = OnlineMapsLocationService.instance.position;
-        Utils.RemoveAllChildren(parentPnbuttonCenter);
-        for (int i = 0; i < 5; i++)
+      if(!isInitSuccess)
         {
-            UpdateDistant(i, curentPosition);
+            Utils.RemoveAllChildren(parentPnbuttonCenter);
+            for (int i = 0; i < 6; i++)
+            {
+                UpdateDistant(i, curentPosition);
+            }
+
         }
+      
         yield return null;
     }
     public void OnClickChooseCenter()
@@ -124,8 +142,8 @@ public class CenterControl : MonoBehaviour
                 _searchMarker.label = "center Localtion";
             }
 
-            if (_api.zoom < 10)
-                _api.zoom = 10;
+           // if (_api.zoom < 10)
+                _api.zoom = 15;
 
             _api.position = position;
             _api.Redraw();
@@ -140,19 +158,14 @@ public class CenterControl : MonoBehaviour
         OnlineMapsGoogleDirections query
             = OnlineMapsGoogleDirections.Find(yourPos, Datacenter.instance.listCenter[centerID].pos);
         query.OnComplete += CheckKC;
-    }
-   // bool isIn;
+    }  
     void CheckKC(string response)
     {
         float kc;
         List<OnlineMapsDirectionStep> steps = OnlineMapsDirectionStep.TryParse(response);
         if (steps != null)
         {
-            kc = CaculateeKHoangCach(steps);
-            //if (kc < 5)
-            //{
-            //    isIn = true;
-            //}
+            kc = CaculateeKHoangCach(steps);      
         }
 
     }
@@ -166,6 +179,9 @@ public class CenterControl : MonoBehaviour
     int initCounter = 0;
     void OnDistanFindComplete(string response)
     {
+        //if (!isShow)
+        //    return;
+        Debug.Log("h no mơi zo");
         List<OnlineMapsDirectionStep> steps = OnlineMapsDirectionStep.TryParse(response);
         if (steps != null)
         {
@@ -182,9 +198,12 @@ public class CenterControl : MonoBehaviour
 
 
         bt.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(delegate { GotoCenter(c); });
-
         initCounter++;
         Sort();
+        if(initCounter==6)
+        {
+            isInitSuccess = true;
+        }
     }
     public void GotoCenter(int centerID)
     {
