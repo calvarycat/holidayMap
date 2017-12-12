@@ -33,8 +33,7 @@ public class Dragable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     }
 
     public void OnDrag(PointerEventData eventData)
-    {
-        Debug.Log(eventData.position);
+    {     
         this.transform.position = eventData.position;
         if (placeholder.transform.parent != placeholderParent)
             placeholder.transform.SetParent(placeholderParent);

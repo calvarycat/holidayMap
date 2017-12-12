@@ -18,9 +18,9 @@ public class CameraDevice : MonoBehaviour
         camImage.material.mainTexture = webCam;
         //  baseRotation = transform.rotation;
         webCam.Play();
-#if UNITY_IPHONE
-        transform.Rotate(0, 0, 0);
-#endif
+//#if UNITY_IPHONE
+//        transform.Rotate(0, 0, 0);
+//#endif
     }
     public void OnHide()
     {
@@ -28,7 +28,11 @@ public class CameraDevice : MonoBehaviour
     }
     public void OnEnable()
     {
+#if UNITY_IPHONE
         int randomOpen = Random.Range(1, 2);
+#else
+        int randomOpen = Random.Range(10, 30);
+#endif
         Invoke("ShowTheGift", randomOpen);
     }
 

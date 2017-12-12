@@ -38,8 +38,7 @@ public class ControlQuestion : MonoBehaviour
         int LableAnswer = 0;
         Debug.Log(chooseQuest + g.answer.Count);
         foreach (Answer ans in g.answer)
-        {
-            Debug.Log("Co zo");
+        {           
             GameObject obj = Instantiate(Answer, parrentAnswer);
             obj.transform.localScale = Vector3.one;
             obj.transform.localPosition = Vector3.zero;

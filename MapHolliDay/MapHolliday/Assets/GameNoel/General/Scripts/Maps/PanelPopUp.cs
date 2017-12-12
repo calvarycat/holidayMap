@@ -12,6 +12,7 @@ public class PanelPopUp : MonoBehaviour {
     public Text txtTitle;
     public Text txtOk;
     public YesNoInit yesNo;
+    public bool isShow;
     private void Awake()
     {
         intance = this;
@@ -22,12 +23,14 @@ public class PanelPopUp : MonoBehaviour {
         txtTitle.text = title;
         txtShowInfo.text = info;
         txtOk.text = ok;
+        isShow = true;
     }
     public void OnHidePopUp()
     {
         Debug.Log("hide popUp");
         root.SetActive(false);
         txtShowInfo.text = "";
+        isShow = false;
 
     }
     public void OnInitYesNo (string message,

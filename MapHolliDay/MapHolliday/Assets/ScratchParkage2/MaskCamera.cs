@@ -73,6 +73,8 @@ public class MaskCamera : MonoBehaviour
 
     public void Update()
     {
+        if (PanelPopUp.intance.isShow)
+            return;
         newHolePosition = null;
         if (Input.GetMouseButton(0))
         {
