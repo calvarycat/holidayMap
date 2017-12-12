@@ -1,0 +1,61 @@
+KEY,vi,en
+C_day,ngày,day(s)
+C_hour,giờ,hour(s)
+C_minutes,phút,minute(s)
+C_Login,Đăng nhập,Login
+C_Username,Tài khoản,UserName
+C_CurrentPassword,Mật khẩu hiện tại,Current Password
+C_Password,Mật khẩu:,Password:
+C_ConfirmPassword,Xác nhận mật khẩu,Confirm Password
+C_Submit,Gửi,Submit
+C_Save,Lưu,Save
+C_Cancel,Hủy,Cancel
+C_Back,Quay lại,Back
+C_Next,Tiếp tục,Next
+C_Edit,Sửa,Edit
+C_Skip,Bỏ qua,Skip
+C_Close,Đóng,Close
+C_Send,Gửi,Send
+C_Select,Chọn,Select
+C_ON,Bật,On
+C_OFF,Tắt,Off
+C_Confirm,Xác nhận,Confirm
+C_Change,Thay đổi,Change
+C_Loading,Đang tải,Loading
+C_Language,Ngôn ngữ,Language
+C_Code,Mã,Code
+C_FIRSTNAME,TÊN,FIRST NAME
+C_LASTNAME,HỌ,LAST NAME
+C_NICKNAME,BIỆT DANH,NICK NAME
+C_PHONE,SỐ ĐIỆN THOẠI,PHONE
+C_COUNTRY,QUỐC GIA,COUNTRY
+C_EMAIL,EMAIL,EMAIL
+C_PASSWORD,MẬT KHẨU,PASSWORD
+C_LANGUAGE,NGÔN NGỮ,LANGUAGE
+C_Firstname,Tên,First name
+C_Lastname,Họ,Last name
+C_Country,Địa chỉ,Country
+C_Email,Email,Email
+C_Phone,Số Điện Thoại,Phone
+C_Message,Thông điệp,Message
+C_ForgotPass,Quên mật khẩu?,Forgot Password?
+C_ClickHere,Bấm vào đây.,Click here.
+C_RetryOnLostConnection,Lỗi kết nối. Bạn có muốn thử lại ?,Connection error. Do you want to retry ?
+C_RetryOnError,"Có lỗi. Bạn có muốn thử lại ?","Error. Do you want to retry ?"
+C_Start,Bắt đầu,Start
+C_Yes,Yes,Yes
+C_No,No,No
+C_Result,Kết quả,Result
+C_Finish,Kết thúc,Finish
+C_Points,Điểm,Points
+C_Correct,Đúng,Correct
+C_Incorrect,Sai,Incorrect
+C_You,Bạn,You
+C_Doctor,Bác sĩ,Doctor
+C_Check,Kiểm tra,Check
+c_True,Đúng,True
+C_False,Sai,False
+C_Systolic,Tâm thu,Systolic
+C_SUCCESS,THÀNH CÔNG,SUCCESS
+C_ERROR,LỖI,ERROR
+C_UpdateVersion, Vui lòng cập nhật lên phiên bản mới, Please update to new version
