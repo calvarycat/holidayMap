@@ -64,7 +64,7 @@ public class PnInCenter : MonoBehaviour
         txtIndex.text = (indexText + 1).ToString() + "/" + listTestTutorial.Length;
         txtTut.text = listTestTutorial[_idx];
         Debug.Log(_idx + "/" + listTestTutorial.Length);
-        if(_idx+1== listTestTutorial.Length)
+        if (_idx + 1 == listTestTutorial.Length)
         {
             btnBatDau.gameObject.SetActive(true);
         }
@@ -82,14 +82,15 @@ public class PnInCenter : MonoBehaviour
     public void OnButtonQuayLaiSauClick()
     {
         OnShow(false);// tắt đi mở lại cái chọn địa điểm
-        if(Input.location.isEnabledByUser)
+        if (Input.location.isEnabledByUser)
         {
             pnTrungTam.OnShow(true);
-        }else
+        }
+        else
         {
             pncenterWithout.OnShow(true);
         }
-       
+
         Debug.Log("On button Quay lại sau Click");
     }
     #region  im right here
@@ -134,14 +135,16 @@ public class PnInCenter : MonoBehaviour
         }
         else
         {
-            PanelPopUp.intance.OnInitInforPopUp("", st);
-           // PanelPopUp.intance.OnInitInforPopUp("Opps!!", "Bạn chưa đến đúng vị trí. Vui lòng thử lại!! ", "Đồng ý");
+            // PanelPopUp.intance.OnInitInforPopUp("", st);
+            PanelPopUp.intance.OnInitInforPopUp("Opps!!", "Bạn chưa đến đúng vị trí. Vui lòng thử lại!! ", "Đồng ý");
         }
     }
     string st;
     public bool CheckGotoCenter(int CenterID)
     {
-      //  return true;
+#if UNITY_EDITOR
+          return true;
+#else
         Vector2 currentPos = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
 
 
@@ -166,7 +169,7 @@ public class PnInCenter : MonoBehaviour
             return true;
         }
         return false;
-      //  Debug.Log(pos.name + "//" + pos.pos + "/// " + currentPos.ToString());
+#endif      
     }
     #endregion
 }

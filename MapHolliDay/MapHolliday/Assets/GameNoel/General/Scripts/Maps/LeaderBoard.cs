@@ -6,16 +6,34 @@ using UnityEngine.UI;
 using Facebook.Unity;
 
 public class LeaderBoard : MonoBehaviour {
-
+    public GameObject Root;
     public GameObject btnLoggin;
     public Texture2D texx;
     public RawImage rawi;
     public Image imgFa;
+    public GameObject leaderPrefabs;
+    public Transform parentLeader;
+
+    public List<LeaderUser> listLeader;
     // Use this for initialization
     void Start () {
         Debug.Log(DateTime.Now);       
 	}
-	
+	public void OnShow(bool isShow)
+    {
+        Root.gameObject.SetActive(true);
+    }
+    public void LoadLeaderBoard()
+    {
+        Utils.RemoveAllChildren(parentLeader);
+        foreach(LeaderUser ld in listLeader)
+        {
+            GameObject obj = Instantiate(leaderPrefabs, parentLeader);
+            LeaderInit li = obj.GetComponent<LeaderInit>();
+            li.Init(ld);
+            obj.transform.localScale = Vector3.one;
+        }
+    }
 
    public void Loggin()
     {
@@ -95,5 +113,13 @@ public class LeaderBoard : MonoBehaviour {
         });
        
     }
-   
+  
+}
+public class LeaderUser
+{
+    public int userID;
+    public string UserName;
+    public int rank;
+    public float timePlay;
+
 }

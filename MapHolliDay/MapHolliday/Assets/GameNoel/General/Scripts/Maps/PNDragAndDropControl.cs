@@ -11,8 +11,9 @@ public class PNDragAndDropControl : MonoBehaviour
     private GroupDrag g;
     public Transform parrentAnswer;
     public Transform parrentAnswer1;
-    public Transform parrentAnswer2;
+  
     public Transform panelSuccess;
+    public pnSuccess pnSuccess;
 
 
     public List<DragELement> TronMangAnswer(List<DragELement> dr)
@@ -132,10 +133,10 @@ public class PNDragAndDropControl : MonoBehaviour
     #region DragAndDropGame
     void ShowNextStep()
     {
-        PanelPopUp.intance.OnInitInforPopUp("Hurray!!", "xin chúc mừng bạn đã hoàn thành thử thách, nào ta cùng selfie nào :D!! ");
+        //PanelPopUp.intance.OnInitInforPopUp("Hurray!!", "xin chúc mừng bạn đã hoàn thành thử thách, nào ta cùng selfie nào :D!! ");
         gameObject.SetActive(true);
-        panelSuccess.gameObject.SetActive(true);
-        
+        //  panelSuccess.gameObject.SetActive(true);
+        pnSuccess.OnShow(true);
     }
     #endregion
     public ControlQuestion controlQuest;
