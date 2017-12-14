@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using UnityEngine;
 
 public static class Utility
 {
@@ -46,5 +47,10 @@ public static class Utility
             // Return the hexadecimal string.
             return sBuilder.ToString();
         }
+    }
+    public static Sprite Texture2DToSprite(Texture2D input)
+    {
+        Rect rec = new Rect(0, 0, input.width, input.height);
+        return Sprite.Create(input, rec, new Vector2(0.5f, 0.5f));
     }
 }

@@ -27,7 +27,7 @@ public class PanelPopUp : MonoBehaviour {
     }
     public void OnHidePopUp()
     {
-        Debug.Log("hide popUp");
+    //    Debug.Log("hide popUp");
         root.SetActive(false);
         txtShowInfo.text = "";
         isShow = false;

@@ -126,6 +126,7 @@ public class PnInCenter : MonoBehaviour
     {
         if (CheckGotoCenter(centerID))
         {
+            PanelPopUp.intance.OnInitInforPopUp("", st);
             pnImRightHere.gameObject.SetActive(true);
             HideImRightHere[0].gameObject.SetActive(false);
             HideImRightHere[1].gameObject.SetActive(false);
@@ -133,15 +134,39 @@ public class PnInCenter : MonoBehaviour
         }
         else
         {
-            PanelPopUp.intance.OnInitInforPopUp("Opps!!", "Bạn chưa đến đúng vị trí. Vui lòng thử lại!! ", "Đồng ý");
+            PanelPopUp.intance.OnInitInforPopUp("", st);
+           // PanelPopUp.intance.OnInitInforPopUp("Opps!!", "Bạn chưa đến đúng vị trí. Vui lòng thử lại!! ", "Đồng ý");
         }
     }
+    string st;
     public bool CheckGotoCenter(int CenterID)
     {
-        return true;
+      //  return true;
         Vector2 currentPos = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
+
+
+        Location l1 = new Location();
+        l1.Latitude = Input.location.lastData.latitude;
+        l1.Longitude= Input.location.lastData.longitude;
+      
+
         PositionWELCenter pos = Datacenter.instance.listCenter[CenterID];
-        Debug.Log(pos.name + "//" + pos.pos + "/// " + currentPos.ToString());
+        Location l2 = new Location();
+
+        //l2.Longitude = 106.683395;// pos.pos.x;
+        //l2.Latitude = 10.776305 ;// pos.pos.y;
+        l2.Longitude =  pos.pos.x;
+        l2.Latitude =  pos.pos.y;
+                                
+        double rs = Utils.CalculateDistance(l1, l2);
+        st= CenterID.ToString()+ rs.ToString() + "/[" + l1.Latitude.ToString() + "," + l1.Longitude.ToString() + "]/[" + l2.Latitude.ToString() + "," + l2.Longitude + "]";
+    
+       if(rs<0.1)
+        {
+            return true;
+        }
+        return false;
+      //  Debug.Log(pos.name + "//" + pos.pos + "/// " + currentPos.ToString());
     }
     #endregion
 }

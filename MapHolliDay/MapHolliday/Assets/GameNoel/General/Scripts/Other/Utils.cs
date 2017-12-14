@@ -78,7 +78,7 @@ public class Utils
     public static string GetLableAnswer(int lab)
     {
         char rs = (char)65;
-         rs = Convert.ToChar(lab+65);      
+        rs = Convert.ToChar(lab + 65);
         return rs.ToString().ToUpper();
 
     }
@@ -174,7 +174,7 @@ public class Utils
     }
     public static string SecondToString(int totalseconds) //return hour - minutes-seconds
     {
-        
+
         long hour = 0;
         long minute = totalseconds / 60;
         long second = totalseconds % 60;
@@ -206,7 +206,7 @@ public class Utils
 
         if (addnew)
         {
-            drop.options.Add(new Dropdown.OptionData {text = value});
+            drop.options.Add(new Dropdown.OptionData { text = value });
             drop.value = drop.options.Count - 1;
         }
 
@@ -276,6 +276,62 @@ public class Utils
             image.rectTransform.sizeDelta = new Vector2(newWidth, newHeight);
         }
     }
+
+
+
+
+    private static double DegreesToRadians(double degrees)
+    {
+        return degrees * Math.PI / 180.0;
+    }
+
+    public static double CalculateDistance(Location location1, Location location2)
+    {
+        double circumference = 40000.0; // Earth's circumference at the equator in km
+        double distance = 0.0;
+
+        //Calculate radians
+        double latitude1Rad = DegreesToRadians(location1.Latitude);
+        double longitude1Rad = DegreesToRadians(location1.Longitude);
+        double latititude2Rad = DegreesToRadians(location2.Latitude);
+        double longitude2Rad = DegreesToRadians(location2.Longitude);
+
+        double logitudeDiff = Math.Abs(longitude1Rad - longitude2Rad);
+
+        if (logitudeDiff > Math.PI)
+        {
+            logitudeDiff = 2.0 * Math.PI - logitudeDiff;
+        }
+
+        double angleCalculation =
+            Math.Acos(
+              Math.Sin(latititude2Rad) * Math.Sin(latitude1Rad) +
+              Math.Cos(latititude2Rad) * Math.Cos(latitude1Rad) * Math.Cos(logitudeDiff));
+
+        distance = circumference * angleCalculation / (2.0 * Math.PI);
+
+        return distance;
+    }
+
+    public static double CalculateDistance(params Location[] locations)
+    {
+        double totalDistance = 0.0;
+
+        for (int i = 0; i < locations.Length - 1; i++)
+        {
+            Location current = locations[i];
+            Location next = locations[i + 1];
+
+            totalDistance += CalculateDistance(current, next);
+        }
+
+        return totalDistance;
+    }
+}
+public class Location
+{
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
 }
 
 public class EnumParser
