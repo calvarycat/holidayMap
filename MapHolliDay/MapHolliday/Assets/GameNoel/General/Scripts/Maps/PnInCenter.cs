@@ -45,8 +45,7 @@ public class PnInCenter : MonoBehaviour
             indexText--;
       
            // indexText = listTestTutorial.Length - 1;
-        }
-        Debug.Log("On button pre clickj" + indexText);
+        }      
         UpdateTutorial(indexText);
     }
     public void OnButtonNextClick()
@@ -54,10 +53,9 @@ public class PnInCenter : MonoBehaviour
        
         if (indexText < listTestTutorial.Length-1)
         {
-            indexText++;
-          //  indexText = 0;
+            indexText++;        
         }
-        Debug.Log("On button nextClickClick" + indexText);
+    
         UpdateTutorial(indexText);
     }
     public GameObject btnBatDau;
@@ -65,8 +63,7 @@ public class PnInCenter : MonoBehaviour
     public void UpdateTutorial(int _idx)
     {
         txtIndex.text = (indexText + 1).ToString() + "/" + listTestTutorial.Length;
-        txtTut.text = listTestTutorial[_idx];
-     //   Debug.Log(_idx + "/" + listTestTutorial.Length);
+        txtTut.text = listTestTutorial[_idx];   
         if (_idx + 1 == listTestTutorial.Length)
         {
             btnBatDau.gameObject.SetActive(true);
@@ -101,7 +98,6 @@ public class PnInCenter : MonoBehaviour
             pncenterWithout.OnShow(true);
         }
 
-        Debug.Log("On button Quay lại sau Click");
     }
     #region  im right here
     public GameObject pnImRightHere;
@@ -183,7 +179,7 @@ public class PnInCenter : MonoBehaviour
         double rs = Utils.CalculateDistance(l1, l2);
         st= CenterID.ToString()+ rs.ToString() + "/[" + l1.Latitude.ToString() + "," + l1.Longitude.ToString() + "]/[" + l2.Latitude.ToString() + "," + l2.Longitude + "]";
     
-       if(rs<0.1)
+       if(rs<0.5)
         {
             return true;
         }

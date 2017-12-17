@@ -11,14 +11,7 @@ public class CameraDevice : MonoBehaviour
     public GameObject gift;
     public ControlQuestion controlQuestion;
  
-    //void Start()
-    //{
-    //    webCam = new WebCamTexture();
-    //    camImage.texture = webCam;
-      //    camImage.material.mainTexture = webCam;
-    //    baseRotation = transform.rotation;
-    //    webCam.Play();
-    //}
+  
     public void OnHide()
     {
         gameObject.SetActive(false);
@@ -36,7 +29,10 @@ public class CameraDevice : MonoBehaviour
         }
         Invoke("ShowTheGift", randomOpen);
     }
-
+    private void OnDisable()
+    {
+        CancelInvoke("ShowTheGift");
+    }
     void ShowTheGift()
     {
         gift.gameObject.SetActive(true);

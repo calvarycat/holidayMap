@@ -18,16 +18,45 @@ public class LeaderBoard : MonoBehaviour
     public LeaderInit leaderUserDefault;
     void Start()
     {
-        Debug.Log(DateTime.Now);
-     
 
+        GetDataRank();
+        GetUserRank();
     }
     public void OnShow(bool isShow)
     {
-        Root.gameObject.SetActive(true);
-        //  LoadLeaderBoard();
+        Root.gameObject.SetActive(true);        
         GetDataRank();
-        
+        //  
+      //  leaderUserDefault.LoadLeaderItem(0, rootresult.result[0]);
+    }
+    public void GetUserRank()
+    {
+        SentGetUserID st = new SentGetUserID();
+        int userid = PlayerPrefs.GetInt(PlayerPrefsContance.UserID, -1);
+     
+        if (userid != -1)
+        {
+            st.userID = userid;
+            BaseOnline.Instance.Post("https://wallstreetenglish.edu.vn/api/index/get-rank-user", st, ResPonseUserRank);
+        }
+    }
+    private void ResPonseUserRank(string res)
+    {
+        int a = 5;      
+        try
+        {
+           
+            RootUserRank rootresult = JsonMapper.ToObject<RootUserRank>(res);
+            //Debug.Log(rootresult.result[0].rank);
+
+           leaderUserDefault.LoadLeaderItem(rootresult.result[0].rank, rootresult.result[0]);
+           
+
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("respon User" + ex.ToString());
+        }
     }
     public void GetDataRank()
     {
@@ -36,6 +65,7 @@ public class LeaderBoard : MonoBehaviour
         int userid = PlayerPrefs.GetInt(PlayerPrefsContance.UserID, -1);
         if (userid != -1)
         {
+            st.userID = userid;
             BaseOnline.Instance.Post("https://wallstreetenglish.edu.vn/api/index/get-rank", st, ResponseFromServer);
         }
 
@@ -43,41 +73,25 @@ public class LeaderBoard : MonoBehaviour
     }
     public void ResponseFromServer(string res)
     {
-        Debug.Log(res);
-     
+      
         try
         {
             int rank = 1;
             RootObjectLeaderBoard rootresult = JsonMapper.ToObject<RootObjectLeaderBoard>(res);
-            Debug.Log(rootresult.result.Count);
-            leaderUserDefault.LoadLeaderItem(0, rootresult.result[0]);
             foreach (Transform tran in parentLeader.transform)
             {
                 LeaderInit li = tran.GetComponent<LeaderInit>();
-                li.LoadLeaderItem(rank, rootresult.result[rank]);
+                li.LoadLeaderItem(rank, rootresult.result[rank-1]);
                 rank++;
             }
 
         }
         catch (Exception ex)
         {
-            Debug.Log("" + ex.ToString());
+            Debug.Log("respon Leader" + ex.ToString());
         }
     }
-    public void LoadLeaderBoard()
-    {
-        Utils.RemoveAllChildren(parentLeader);
-        //foreach(LeaderUser ld in listLeader)
-        //{
-        //    GameObject obj = Instantiate(leaderPrefabs, parentLeader);
-        //    LeaderInit li = obj.GetComponent<LeaderInit>();
-        //    li.Init(ld);
-        //    obj.transform.localScale = Vector3.one;
-
-        //}
-
-        //  message.avatar = Utils.TextureToString(texx);
-    }
+  
 
     public void Loggin()
     {
@@ -159,14 +173,7 @@ public class LeaderBoard : MonoBehaviour
     }
 
 }
-//public class LeaderUser
-//{
-//    public int userID;
-//    public string UserName;
-//    public int rank;
-//    public float timePlay;
 
-//}
 public class SentGetUserID
 {
     public int userID;
@@ -179,9 +186,16 @@ public class Result
     public string name { get; set; }
     public double? timeplay { get; set; }
     public string icon { get; set; }
+    public int rank { get; set; }
 }
 
 public class RootObjectLeaderBoard
+{
+    public List<Result> result { get; set; }
+}
+
+
+public class RootUserRank
 {
     public List<Result> result { get; set; }
 }

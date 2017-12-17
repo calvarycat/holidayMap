@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BtnCenter : MonoBehaviour {
     public int id;
-    public int distant;
+    public double distant;
     public Button btnCenter;
     public Text txtName;
 
@@ -14,5 +14,6 @@ public class BtnCenter : MonoBehaviour {
         txtName.text = name + " :  " + _distant.ToString() +"m";
         id = _id;
         distant = _distant;
+       
     }
 }

@@ -20,8 +20,10 @@ public class Selfie : MonoBehaviour
     public GameObject[] objAfter;
     private void OnEnable()
     {
+        if(!isInit)
         StartSelfie();
     }
+    bool isInit = false;
     void StartSelfie()
     {
         ProcessTakePic(true);
@@ -49,6 +51,7 @@ public class Selfie : MonoBehaviour
         background.texture = cameraTexture; // Set the texture
         camAvailable = true; // Set the camAvailable for future purposes.
                              //  background.transform.Rotate(0, 0, -90);
+        isInit = true;
     }
     // Update is called once per frame
     void Update()
@@ -100,8 +103,12 @@ public class Selfie : MonoBehaviour
         else
         {
 
+
+#if UNITY_ANDROID
             background.transform.eulerAngles = new Vector3(0, 0, -270);
             background.transform.localScale = new Vector3(1, -1, 1);
+#endif
+            
         }
         cameraTexture.Play();
     }
