@@ -1,4 +1,6 @@
-﻿using LitJson;
+﻿using Facebook.Unity;
+using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,16 +12,19 @@ public class pnSentForm : MonoBehaviour
     public FormSent frmSent;
     public GameObject root;
     public RawImage raw;
-    public Texture2D tx2d;
-    string userFacebookID;
     public Text txtName;
     public Text txtEmail;
     public Text txtPhone;
     public Text txtage;
     byte[] icon;
-   public void OnShow(bool isShow)
+    public ControlQuestion controlQuest;
+    public Text txtResult;
+    public Selfie selfie;
+    public void OnShow(bool isShow)
     {
         root.SetActive(isShow);
+        txtResult.text = Utils.SecondToString((int)controlQuest.timeRuning);
+        UpdateCurrentUserScore();// get usser facebook image
 
     }
     public void ButtonSentClick()
@@ -28,45 +33,72 @@ public class pnSentForm : MonoBehaviour
     }
     public void GetFormSendInfomation()
     {
-        if(string.IsNullOrEmpty(txtName.text)|| string.IsNullOrEmpty(txtage.text)|| string.IsNullOrEmpty(txtPhone.text)
+        if (string.IsNullOrEmpty(txtName.text) || string.IsNullOrEmpty(txtage.text) || string.IsNullOrEmpty(txtPhone.text)
             || string.IsNullOrEmpty(txtEmail.text))
         {
             PanelPopUp.intance.OnInitInforPopUp("Opps", "Check your input");
             return;
         }
+        if(!IsValidEmail(txtEmail.text.Trim()))
+        {
+            {
+                PanelPopUp.intance.OnInitInforPopUp("Opps", "Email không hợp lệ");
+                return;
+            }
+        }
 
         frmSent = new FormSent();
         ReadTexture();
         frmSent.name = txtName.text;
+        frmSent.email = txtEmail.text;
         frmSent.age = int.Parse(txtage.text);
         frmSent.phone = txtPhone.text;
-        // StartCoroutine(SentForm());
-        leaderboard.OnShow(true);
+        frmSent.timeplay = (int)controlQuest.timeRuning;
+        Sent();
+
     }
-    IEnumerator SentForm()
+
+
+    bool IsValidEmail(string email)
     {
-        WWWForm form = new WWWForm();
-        form.AddBinaryData("icon", icon, "iconUser.png", "image/png");
+        try
+        {
+
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    void Sent()
+    {
         string datarp = JsonMapper.ToJson(frmSent);
-        form.AddField("data", datarp);
-        WWW httpResponse = new WWW("http://localhost:61604/", form);
-        float timer = 0;
-        while (!httpResponse.isDone)
+        BaseOnline.Instance.Post("https://wallstreetenglish.edu.vn/api/index/send-form-challenge", frmSent, ResponseFromServer);
+
+    }
+    void ResponseFromServer(string res)
+    {
+        Debug.Log(res);
+        try
         {
-            if (timer > 120)
-            {
-                Debug.Log("sent too long");
-                break;
-            }
-            timer += Time.deltaTime;
-            yield return null;
+            RootSentFormResult rootresult = JsonMapper.ToObject<RootSentFormResult>(res);
+            SentSuccess(); // save thong tin vaof trong app
+            PlayerPrefs.SetInt(PlayerPrefsContance.UserID, rootresult.userID);
         }
-        yield return httpResponse;
-        if (!string.IsNullOrEmpty(httpResponse.error))
+        catch (Exception ex)
         {
-            Debug.Log("sent error");
+            Debug.Log(ex.ToString());
+            PanelPopUp.intance.OnInitInforPopUp("Opps!", "Try again " + res + ex.ToString(), "Ok" );
         }
-        yield return null;
+
+
+    }
+   
+    public void SentSuccess()
+    {
+        leaderboard.OnShow(true);
     }
     void ReadTexture()
     {
@@ -76,24 +108,38 @@ public class pnSentForm : MonoBehaviour
                     0,
                     RenderTextureFormat.Default,
                     RenderTextureReadWrite.Linear);
-
-        // Blit the pixels on texture to the RenderTexture
         Graphics.Blit(raw.texture, tmp);
-        // Backup the currently set RenderTexture
         RenderTexture previous = RenderTexture.active;
-        // Set the current RenderTexture to the temporary one we created
         RenderTexture.active = tmp;
-        // Create a new readable Texture2D to copy the pixels to it
         Texture2D myTexture2D = new Texture2D(raw.texture.width, raw.texture.height);
-        // Copy the pixels from the RenderTexture to the new Texture
         myTexture2D.ReadPixels(new Rect(0, 0, tmp.width, tmp.height), 0, 0);
         myTexture2D.Apply();
-        // Reset the active RenderTexture
         RenderTexture.active = previous;
-        // Release the temporary RenderTexture
         RenderTexture.ReleaseTemporary(tmp);
-       icon = myTexture2D.EncodeToPNG();
-        // "myTexture2D" now has the same pixels from "texture" and it's readable.
+        // icon = myTexture2D.EncodeToPNG();  
+        frmSent.icon = Utils.TextureToString(myTexture2D);
+    }
+    public GameObject pnPopupSuccess;
+    public void BangXepHangClick()
+    {
+        leaderboard.OnShow(true);
+        pnPopupSuccess.gameObject.SetActive(false);
+    }
+    // public Image imgFaceBookAvata;
+    public void UpdateCurrentUserScore()
+    {
+        if (FB.IsLoggedIn)
+        {
+            Facebook.Unity.FB.API("https" + "://graph.facebook.com/" + "1633985750233291" + "/picture?type=large", HttpMethod.GET, delegate (IGraphResult result)
+            {
+                raw.texture = result.Texture;//(Texture)Sprite.Create(result.Texture, new Rect(0, 0, 125, 125), new Vector2(0.5f, 0.5f), 100);
+            });
+        }
+    }
+    public void OnBackClick()
+    {
+        selfie.gameObject.SetActive(true);
+        OnShow(false);
     }
 }
 public class FormSent
@@ -101,9 +147,13 @@ public class FormSent
     public string name;
     public string email;
     public string phone;
-    public string message;
+    public string icon;
     public int age;
-    public int score; 
-    public string userFacebookID;
-    public string facebookName;
+    public float timeplay;
+
+}
+public class RootSentFormResult
+{
+    public string status { get; set; }
+    public int userID { get; set; }
 }

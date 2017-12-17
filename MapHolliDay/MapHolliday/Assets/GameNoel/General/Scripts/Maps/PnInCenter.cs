@@ -40,30 +40,33 @@ public class PnInCenter : MonoBehaviour
 
     public void OnButtonPreClick()
     {
-        indexText--;
-        if (indexText < 0)
+        if (indexText > 0)
         {
-            indexText = listTestTutorial.Length - 1;
+            indexText--;
+      
+           // indexText = listTestTutorial.Length - 1;
         }
         Debug.Log("On button pre clickj" + indexText);
         UpdateTutorial(indexText);
     }
     public void OnButtonNextClick()
     {
-        indexText++;
-        if (indexText >= listTestTutorial.Length)
+       
+        if (indexText < listTestTutorial.Length-1)
         {
-            indexText = 0;
+            indexText++;
+          //  indexText = 0;
         }
         Debug.Log("On button nextClickClick" + indexText);
         UpdateTutorial(indexText);
     }
     public GameObject btnBatDau;
+    public GameObject imgStep1;
     public void UpdateTutorial(int _idx)
     {
         txtIndex.text = (indexText + 1).ToString() + "/" + listTestTutorial.Length;
         txtTut.text = listTestTutorial[_idx];
-        Debug.Log(_idx + "/" + listTestTutorial.Length);
+     //   Debug.Log(_idx + "/" + listTestTutorial.Length);
         if (_idx + 1 == listTestTutorial.Length)
         {
             btnBatDau.gameObject.SetActive(true);
@@ -71,6 +74,13 @@ public class PnInCenter : MonoBehaviour
         else
         {
             btnBatDau.gameObject.SetActive(false);
+        }
+        if(_idx==0)
+        {
+            imgStep1.gameObject.SetActive(true);
+        }else
+        {
+            imgStep1.gameObject.SetActive(false);
         }
     }
     public void OnBatDauClick()
@@ -98,8 +108,8 @@ public class PnInCenter : MonoBehaviour
     public GameObject[] HideImRightHere;
     public void OnButtonImRightHereClick()
     {
-        Debug.Log("On button im right here Click" + CheckGotoCenter(centerID));
-#if UNITY_IPHONE
+      //  Debug.Log("On button im right here Click" + CheckGotoCenter(centerID));
+#if UNITY_PHONE
         if (!Input.location.isEnabledByUser)
         {
             PanelPopUp.intance.OnInitInforPopUp("Opps!!", "Vui Lòng bật local service!! ");
@@ -127,7 +137,7 @@ public class PnInCenter : MonoBehaviour
     {
         if (CheckGotoCenter(centerID))
         {
-            PanelPopUp.intance.OnInitInforPopUp("", st);
+          //  PanelPopUp.intance.OnInitInforPopUp("", st);
             pnImRightHere.gameObject.SetActive(true);
             HideImRightHere[0].gameObject.SetActive(false);
             HideImRightHere[1].gameObject.SetActive(false);
@@ -142,9 +152,18 @@ public class PnInCenter : MonoBehaviour
     string st;
     public bool CheckGotoCenter(int CenterID)
     {
+        if (StaticClass.isCheating)
+        {
+            return true;
+        }
+        // return true;
 #if UNITY_EDITOR
-          return true;
+        return true;
+
 #else
+    
+         Input.location.Start();
+        
         Vector2 currentPos = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
 
 
@@ -169,7 +188,7 @@ public class PnInCenter : MonoBehaviour
             return true;
         }
         return false;
-#endif      
+#endif
     }
     #endregion
 }

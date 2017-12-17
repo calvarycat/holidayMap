@@ -76,14 +76,14 @@ public class PNDragAndDropControl : MonoBehaviour
         {
 
             DragAnswerElement dr = tran.GetComponent<DragAnswerElement>();
-            Debug.Log("vo day " + dr.ans);
+       //     Debug.Log("vo day " + dr.ans);
             leng += dr.ans.Length;
         }
         return leng;
     }
     public void OnClickDone() //Check Gmae
     {
-        Debug.Log("Click Done");
+      //  Debug.Log("Click Done");
         if (CheckAnswer())
         {
 
@@ -117,16 +117,6 @@ public class PNDragAndDropControl : MonoBehaviour
                     result = false;
                 }
             }
-        //if (result)
-        //    foreach (Transform tran in parrentAnswer2)
-        //    {
-        //        DragAnswerElement dr = tran.GetComponent<DragAnswerElement>();
-        //        if (dr.step != tran.GetSiblingIndex() + parrentAnswer1.childCount + parrentAnswer2.childCount)
-        //        {
-        //            result = false;
-        //        }
-        //    }
-
         return result;
 
     }
@@ -134,9 +124,10 @@ public class PNDragAndDropControl : MonoBehaviour
     void ShowNextStep()
     {
         //PanelPopUp.intance.OnInitInforPopUp("Hurray!!", "xin chúc mừng bạn đã hoàn thành thử thách, nào ta cùng selfie nào :D!! ");
-        gameObject.SetActive(true);
+        gameObject.transform.parent.parent.gameObject.SetActive(false);
         //  panelSuccess.gameObject.SetActive(true);
         pnSuccess.OnShow(true);
+        controlQuest.isStartRun = false;
     }
     #endregion
     public ControlQuestion controlQuest;

@@ -16,23 +16,22 @@ public class pnHuongDan : MonoBehaviour
     }
     public void OnBtnChonDiaDiemClick()
     {
-#if UNITY_PHONE
-        Input.location.Start();
+
+#if UNITY_EDITOR
+        GoOnLocalServices();
+        return;
+#endif
+      
         if (!Input.location.isEnabledByUser)
         {
-             PanelPopUp.intance.OnInitYesNo("To continues using this app, please enable local services", OnOkClick, OnCanCleClick);
-           // PanelPopUp.intance.OnInitInforPopUp("To continues using this app, please enable local services");
+            PanelPopUp.intance.OnInitYesNo("To continues using this app, please enable local services", OnOkClick, OnCanCleClick);
 
         }
         else
         {
-           GoOnLocalServices();
+            GoOnLocalServices();
         }
-#else
 
-         GoOnLocalServices();
-      //  GoWithoutService();
-#endif
         isCheckClick = true;
     }
     public void OnCanCleClick()
@@ -40,14 +39,13 @@ public class pnHuongDan : MonoBehaviour
         isCheckClick = false;
         CancelInvoke("OnOkClick");
         GoWithoutService();
-        Debug.Log("OnCancel Click");
-        // load page offline
+    
 
     }
     bool isCheckClick = false;
     public void OnOkClick()
     {
-        if(isCheckClick)
+        if (isCheckClick)
         {
             if (!Input.location.isEnabledByUser)
             {
@@ -64,7 +62,7 @@ public class pnHuongDan : MonoBehaviour
     }
     void GoOnLocalServices()
     {
-        Input.location.Start();   
+       
         Onshow(false);
         pnTrungTam.OnShow(true);
     }
@@ -72,5 +70,9 @@ public class pnHuongDan : MonoBehaviour
     {
         Onshow(false);
         pnCenterWithoutService.OnShow(true);
+    }
+    public void ObBackToMain()
+    {
+        Debug.Log("On Back To Main");
     }
 }

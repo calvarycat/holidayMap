@@ -16,12 +16,15 @@ public class Selfie : MonoBehaviour
     public bool frontFacing;
     WebCamDevice[] devices;
     public ShareManager share;
+    public GameObject[] objBefore;
+    public GameObject[] objAfter;
     private void OnEnable()
     {
         StartSelfie();
     }
     void StartSelfie()
     {
+        ProcessTakePic(true);
         defaultBackground = background.texture;
         devices = WebCamTexture.devices;
 
@@ -62,11 +65,24 @@ public class Selfie : MonoBehaviour
         return;
 #endif
         cameraTexture.Stop();
-        share.ShareScreenshotWithText("Share image", OnShareFinish);
+        ProcessTakePic(false);
+
+    }
+    void ProcessTakePic(bool isHide)
+    {
+       
+        for (int i = 0; i < objBefore.Length; i++)
+        {
+            objBefore[i].SetActive(isHide);
+        }
+        for (int i = 0; i < objAfter.Length; i++)
+        {
+            objAfter[i].SetActive(!isHide);
+        }
     }
     public void OnShareFinish(string re)
     {
-        cameraTexture.Play();
+       // cameraTexture.Play();
         gameObject.SetActive(false);
         pnSentForm.OnShow(true);
 
@@ -83,6 +99,7 @@ public class Selfie : MonoBehaviour
         }
         else
         {
+
             background.transform.eulerAngles = new Vector3(0, 0, -270);
             background.transform.localScale = new Vector3(1, -1, 1);
         }
@@ -94,5 +111,13 @@ public class Selfie : MonoBehaviour
         pnSuccess.OnShow(true);
         gameObject.SetActive(false);
     }
-
+    public void OnShareClick()
+    {
+        share.ShareScreenshotWithText("Share image", OnShareFinish);
+    }
+    public void OnBackCameraClick()
+    {
+        cameraTexture.Play();
+        ProcessTakePic(true);
+    }
 }

@@ -11,124 +11,104 @@ public class CenterControl : MonoBehaviour
     public pnHuongDan pnHuongDan;
     private OnlineMaps _api;
     public GameObject Root;
-    public PnInCenter pnInCenter;  
+    public PnInCenter pnInCenter;
     private OnlineMapsMarker _searchMarker;
     public GameObject pnButtonCenter;
     public Transform parentPnbuttonCenter;
     Vector2 curentPosition;
     public int ChooseCenter = -1;
     bool isInitSuccess;
+    public Text[] txtListKhoangcach;
     void Start()
     {
-        //StartCoroutine(CheckEnableService());
-
         _api = OnlineMaps.instance;
-     //   Invoke("ViewCurrentPosition", .5f);
     }
-    IEnumerator CheckEnableService()
-    {        
-        if (!Input.location.isEnabledByUser)
-        {
-            PanelPopUp.intance.OnInitInforPopUp("Opps!!", "Vui Lòng bật local service!! ");
-           // yield break;
-        }else
-        {
-            PanelPopUp.intance.OnInitInforPopUp("Opps!!", "khong  " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
-        }
-        // Start service before querying location
-        Input.location.Start();
 
-        // Wait until service initializes
-        int maxWait = 20;
-        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
-        {
-            yield return new WaitForSeconds(1);
-            maxWait--;
-        }
-
-        // Service didn't initialize in 20 seconds
-        if (maxWait < 1)
-        {
-            PanelPopUp.intance.OnInitInforPopUp("Opps!!", "khong bat duocj localservice ");
-            yield break;
-        }
-
-        // Connection has failed
-        if (Input.location.status == LocationServiceStatus.Failed)
-        {
-            PanelPopUp.intance.OnInitInforPopUp("Opps!!", "khong bat duocj localservice ");
-            yield break;
-        }
-        else
-        {
-            // Access granted and location value could be retrieved
-            PanelPopUp.intance.OnInitInforPopUp("Opps!!", "khong bat duocj localservice " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
-        }
-
-        // Stop service if there is no need to query location updates continuously
-     //   Input.location.Stop();
-        
-    }
     bool isShow;
     public void OnShow(bool _isShow)
     {
         isShow = _isShow;
         Root.gameObject.SetActive(_isShow);
-        _api = OnlineMaps.instance;
-        if(_isShow)
-        Invoke("ViewCurrentPosition", .5f);
-        initCounter = 0;
+
+     
+        UpdateDistantCenter();
+    }
+
+    public void UpdateDistantCenter()
+    {
+        if (!Input.location.isEnabledByUser)
+        {
+            return;
+        }
+        Input.location.Start();
+        Vector2 currentPos = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
+        Location l1 = new Location();
+        l1.Latitude = Input.location.lastData.latitude;
+        l1.Longitude = Input.location.lastData.longitude;
+        for (int i = 0; i < Datacenter.instance.listCenter.Count; i++)
+        {
+            PositionWELCenter pos = Datacenter.instance.listCenter[i];
+            Location l2 = new Location();
+            l2.Longitude = pos.pos.x;
+            l2.Latitude = pos.pos.y;
+            double rs = Utils.CalculateDistance(l1, l2);
+            txtListKhoangcach[i].text = Datacenter.instance.listCenter[i].name +" "+ Math.Round( rs,2).ToString() +"km";
+
+        }
     }
     void ViewCurrentPosition()
     {
-        curentPosition = OnlineMapsLocationService.instance.position;
-        if (curentPosition != Vector2.zero)
-        {            
-            StartCoroutine(Init());
-        }
-        else
-        {           
-            if (Input.location.isEnabledByUser)
-            {
-                float lati = Input.location.lastData.latitude;
-                float longti = Input.location.lastData.longitude;
-                curentPosition = new Vector2(lati, longti);
-            }
-            Invoke("ViewCurrentPosition", .5f);
-        }
+        //curentPosition = OnlineMapsLocationService.instance.position;
+        //if (curentPosition != Vector2.zero)
+        //{
+        //    StartCoroutine(Init());
+        //}
+        //else
+        //{
+        //    if (Input.location.isEnabledByUser)
+        //    {
+        //        Input.location.Start();
+        //        float lati = Input.location.lastData.latitude;
+        //        float longti = Input.location.lastData.longitude;
+        //        curentPosition = new Vector2(lati, longti);
+        //    }
+        //    Invoke("ViewCurrentPosition", .5f);
+        //}
 
     }
 
     public IEnumerator Init()
     {
-      //  Vector2 position = OnlineMapsLocationService.instance.position;
-      if(!isInitSuccess)
+        //  Vector2 position = OnlineMapsLocationService.instance.position;
+        if (!isInitSuccess)
         {
             Utils.RemoveAllChildren(parentPnbuttonCenter);
             for (int i = 0; i < 6; i++)
             {
-                UpdateDistant(i, curentPosition);
+            //    UpdateDistant(i, curentPosition);
             }
 
         }
-      
+
         yield return null;
     }
     public void OnClickChooseCenter()
     {
-        if(ChooseCenter!=-1)
+        if (ChooseCenter != -1)
         {
             Root.gameObject.SetActive(false);
             pnInCenter.InitCenter(ChooseCenter);
             Debug.Log("Ban da chon center " + ChooseCenter);
-        }else
-        {
-            Debug.Log("Please Choose a center");
         }
-       
+        else
+        {
+            PanelPopUp.intance.OnInitYesNo("Vui Lòng chọn 1 trung tâm");
+        }
+
     }
     public void OncenterClick(int id)
     {
+        PanelPopUp.intance.OnInitInforPopUp("No service");
         Vector2 position = Datacenter.instance.listCenter[id].pos;
         if (position != Vector2.zero)
         {
@@ -142,107 +122,103 @@ public class CenterControl : MonoBehaviour
                 _searchMarker.label = "center Localtion";
             }
 
-           // if (_api.zoom < 10)
-                _api.zoom = 15;
+            _api.zoom = 15;
 
             _api.position = position;
             _api.Redraw();
             ChooseCenter = id;
-        }else
+        }
+        else
         {
-            Debug.Log("Please Open services");
+            PanelPopUp.intance.OnInitYesNo("No service");
         }
     }
-    public void CheckInTheCenter(Vector2 yourPos, int centerID)
-    {
-        OnlineMapsGoogleDirections query
-            = OnlineMapsGoogleDirections.Find(yourPos, Datacenter.instance.listCenter[centerID].pos);
-        query.OnComplete += CheckKC;
-    }  
-    void CheckKC(string response)
-    {
-        float kc;
-        List<OnlineMapsDirectionStep> steps = OnlineMapsDirectionStep.TryParse(response);
-        if (steps != null)
-        {
-            kc = CaculateeKHoangCach(steps);      
-        }
 
-    }
-    void UpdateDistant(int i, Vector2 pos)
-    {
-        OnlineMapsGoogleDirections query
-            = OnlineMapsGoogleDirections.Find(OnlineMapsLocationService.instance.position, Datacenter.instance.listCenter[i].pos);
-        query.OnComplete += OnDistanFindComplete;
-    }
-    int kc;
-    int initCounter = 0;
-    void OnDistanFindComplete(string response)
-    {
-        //if (!isShow)
-        //    return;
-        Debug.Log("h no mơi zo");
-        List<OnlineMapsDirectionStep> steps = OnlineMapsDirectionStep.TryParse(response);
-        if (steps != null)
-        {
-            kc = CaculateeKHoangCach(steps);
+    //void CheckKC(string response)
+    //{
+    //    float kc;
+    //    List<OnlineMapsDirectionStep> steps = OnlineMapsDirectionStep.TryParse(response);
+    //    if (steps != null)
+    //    {
+    //        kc = CaculateeKHoangCach(steps);      
+    //    }
 
-        }
-        int c = initCounter;
-        GameObject obj = Instantiate(pnButtonCenter, parentPnbuttonCenter);
-        BtnCenter bt = obj.GetComponent<BtnCenter>();
-        bt.Init(initCounter, Datacenter.instance.listCenter[initCounter].name, kc);
-        obj.transform.localScale = new Vector3(1, 1, 1);
-        obj.transform.localRotation = Quaternion.identity;
-        bt.GetComponentInChildren<Button>().onClick.AddListener(delegate { OncenterClick(c); });
+    //}
+    //void UpdateDistant(int i, Vector2 pos)
+    //{
+    //    OnlineMapsGoogleDirections query
+    //        = OnlineMapsGoogleDirections.Find(OnlineMapsLocationService.instance.position, Datacenter.instance.listCenter[i].pos);
+    //    query.OnComplete += OnDistanFindComplete;
+    //}
+    //int kc;
+    //int initCounter = 0;
+    //void OnDistanFindComplete(string response)
+    //{
+    //    //if (!isShow)
+    //    //    return;
+    //    Debug.Log("h no mơi zo");
+    //    List<OnlineMapsDirectionStep> steps = OnlineMapsDirectionStep.TryParse(response);
+    //    if (steps != null)
+    //    {
+    //        kc = CaculateeKHoangCach(steps);
+
+    //    }
+    //    int c = initCounter;
+    //    GameObject obj = Instantiate(pnButtonCenter, parentPnbuttonCenter);
+    //    BtnCenter bt = obj.GetComponent<BtnCenter>();
+    //    bt.Init(initCounter, Datacenter.instance.listCenter[initCounter].name, kc);
+    //    obj.transform.localScale = new Vector3(1, 1, 1);
+    //    obj.transform.localRotation = Quaternion.identity;
+    //    bt.GetComponentInChildren<Button>().onClick.AddListener(delegate { OncenterClick(c); });
 
 
-        bt.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(delegate { GotoCenter(c); });
-        initCounter++;
-        Sort();
-        if(initCounter==6)
-        {
-            isInitSuccess = true;
-        }
-    }
+    //    bt.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(delegate { GotoCenter(c); });
+    //    initCounter++;
+    //    Sort();
+    //    if(initCounter==6)
+    //    {
+    //        isInitSuccess = true;
+    //    }
+    //}
     public void GotoCenter(int centerID)
     {
+      
         if (centerID != -1)
         {
             Root.gameObject.SetActive(false);
             pnInCenter.InitCenter(centerID);
-            Debug.Log("Ban da chon center " + centerID);
+
         }
-       
+
     }
     public List<BtnCenter> SortedList;
     int ix;
-    public void Sort()
-    {
-        List<BtnCenter> listBtn = new List<BtnCenter>();
-        foreach (Transform tran in parentPnbuttonCenter.transform)
-        {
-            BtnCenter bt = tran.GetComponent<BtnCenter>();
-           
-            listBtn.Add(bt);
-        }
-        SortedList = listBtn.OrderBy(o => o.distant).ToList();
-        ix = 0;
-        foreach (BtnCenter tran in SortedList)
-        {
-            tran.transform.SetSiblingIndex(ix);
-            ix++;
-        }
-    }
-    public int CaculateeKHoangCach(List<OnlineMapsDirectionStep> _routes)
-    {
-        int rs = 0;
-        for (int i = 0; i < _routes.Count; i++)
-        {
-            rs += _routes[i].distance;
-        }
-        return rs;
-    }
+    //public void Sort()
+    //{
+    //    List<BtnCenter> listBtn = new List<BtnCenter>();
+    //    foreach (Transform tran in parentPnbuttonCenter.transform)
+    //    {
+    //        BtnCenter bt = tran.GetComponent<BtnCenter>();
+
+    //        listBtn.Add(bt);
+    //    }
+    //    SortedList = listBtn.OrderBy(o => o.distant).ToList();
+    //    ix = 0;
+    //    foreach (BtnCenter tran in SortedList)
+    //    {
+    //        tran.transform.SetSiblingIndex(ix);
+    //        ix++;
+    //    }
+    //}
+    //public int CaculateeKHoangCach(List<OnlineMapsDirectionStep> _routes)
+    //{
+    //    int rs = 0;
+    //    for (int i = 0; i < _routes.Count; i++)
+    //    {
+    //        rs += _routes[i].distance;
+    //    }
+    //    return rs;
+    //}
     public void OnButtonBackClick()
     {
         Debug.Log("On back click");

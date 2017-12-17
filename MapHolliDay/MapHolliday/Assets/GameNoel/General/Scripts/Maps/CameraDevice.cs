@@ -25,11 +25,15 @@ public class CameraDevice : MonoBehaviour
     }
     public void OnEnable()
     {
-#if UNITY_PHONE
-        int randomOpen = Random.Range(10, 20);
-#else
+#if UNITY_EDITOR
         int randomOpen = Random.Range(1, 2);
+#else
+         int randomOpen = Random.Range(10, 20);
 #endif
+        if(StaticClass.isCheating)
+        {
+            randomOpen = 1;
+        }
         Invoke("ShowTheGift", randomOpen);
     }
 

@@ -13,7 +13,7 @@ public class ControlQuestion : MonoBehaviour
     public GameObject Answer;
     public Text txtQuestion;
     public float timeRuning = 0;
-    bool isStartRun;
+    public bool isStartRun;
     public Text txtTimeCount ;
 
     void Start()

@@ -13,9 +13,13 @@ public class PanelPopUp : MonoBehaviour {
     public Text txtOk;
     public YesNoInit yesNo;
     public bool isShow;
+
     private void Awake()
     {
         intance = this;
+       
+
+       
     }
     public void OnInitInforPopUp(string title="Opps!!",string info="",string ok="OK")
     {

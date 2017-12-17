@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 
+
 public class MaskCamera : MonoBehaviour
 {
     public GameObject Dust;
@@ -20,6 +21,7 @@ public class MaskCamera : MonoBehaviour
     {
         callback = _callback;
         _requestReadPixel = true;
+        
     }
 
     private void CutHole(Vector2 imageSize, Vector2 imageLocalPosition)
@@ -69,6 +71,8 @@ public class MaskCamera : MonoBehaviour
         GetComponent<Camera>().targetTexture = rt;
         //Set Mask Texture to dust material to Generate Dust erase effect
         Dust.GetComponent<Renderer>().material.SetTexture("_MaskTex", rt);
+      
+
     }
 
     public void Update()
